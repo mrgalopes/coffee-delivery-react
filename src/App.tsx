@@ -3,6 +3,7 @@ import { Home } from "./pages/Home";
 import { ThemeProvider } from "styled-components";
 import { defaultTheme } from "./styles/themes/defaultTheme";
 import { DefaultLayout } from "./layouts/DefaultLayout";
+import { GlobalStyle } from "./styles/global";
 
 function App() {
   return (
@@ -14,6 +15,8 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+
+      <GlobalStyle />
     </ThemeProvider>
   );
 }
