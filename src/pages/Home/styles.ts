@@ -58,3 +58,15 @@ export const Icon = styled.span<IconProps>`
   background-color: ${props => props.theme[props.$variant]};
   color: white;
 `
+
+export const OurCoffeesSection = styled.section`
+  margin-top: 2rem;
+  h2 {
+    font-size: 2rem;
+    font-family: "Baloo 2", sans-serif;
+    line-height: 1.3;
+    font-weight: 800;
+    margin-bottom: 3.375rem;
+  }
+`
+

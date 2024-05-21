@@ -3,10 +3,12 @@ import {
   HeroText,
   HomeContainer,
   Icon,
+  OurCoffeesSection,
   ProductDescription,
 } from "./styles";
 import HeroImg from "../../assets/Hero.png";
 import { Coffee, Package, ShoppingCart, Timer } from "@phosphor-icons/react";
+import { CoffeeCard } from "./CoffeeCard";
 
 export function Home() {
   return (
@@ -50,6 +52,11 @@ export function Home() {
           <img src={HeroImg} alt="copo de café" />
         </div>
       </HeroSection>
+
+      <OurCoffeesSection>
+        <h2>Nossos cafés</h2>
+        <CoffeeCard />
+      </OurCoffeesSection>
     </HomeContainer>
   );
 }
