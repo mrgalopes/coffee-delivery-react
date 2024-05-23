@@ -4,6 +4,7 @@ import {
   CurrencyDollar,
   MapPinLine,
   Money,
+  Trash,
 } from "@phosphor-icons/react";
 import {
   Card,
@@ -11,11 +12,21 @@ import {
   Cards,
   CheckoutContainer,
   ComplementInput,
+  ConfirmOrderButton,
   Input,
   Inputs,
+  Item,
+  ItemActions,
+  OrderSummary,
   PaymentSelectionButton,
   PaymentSelectionSection,
+  RemoveButton,
+  SelectedCoffeeCard,
 } from "./styles";
+
+import Expresso from "../../assets/Type=Expresso.png";
+import Latte from "../../assets/Type=Latte.png";
+import { CoffeeAmountSelector } from "../../components/CoffeeAmountSelector";
 
 export function Checkout() {
   return (
@@ -76,7 +87,55 @@ export function Checkout() {
 
         <section>
           <h2>Cafés selecionados</h2>
-          <div></div>
+          <SelectedCoffeeCard>
+            <Item>
+              <div>
+                <img src={Expresso} alt="Expresso" />
+                <ItemActions>
+                  <p>Expresso Tradicional</p>
+                  <div>
+                    <CoffeeAmountSelector />
+                    <RemoveButton>
+                      <Trash />
+                      <span>Remover</span>
+                    </RemoveButton>
+                  </div>
+                </ItemActions>
+              </div>
+              <span>R$ 9,90</span>
+            </Item>
+            <Item>
+              <div>
+                <img src={Latte} alt="Latte" />
+                <ItemActions>
+                  <p>Latte</p>
+                  <div>
+                    <CoffeeAmountSelector />
+                    <RemoveButton>
+                      <Trash />
+                      <span>Remover</span>
+                    </RemoveButton>
+                  </div>
+                </ItemActions>
+              </div>
+              <span>R$ 9,90</span>
+            </Item>
+            <OrderSummary>
+              <div>
+                <span>Total de itens</span>
+                <span>R$ 29,70</span>
+              </div>
+              <div>
+                <span>Entrega</span>
+                <span>R$ 3,50</span>
+              </div>
+              <div>
+                <span>Total</span>
+                <span>R$ 33,20</span>
+              </div>
+            </OrderSummary>
+            <ConfirmOrderButton>Confirmar Pedido</ConfirmOrderButton>
+          </SelectedCoffeeCard>
         </section>
       </form>
     </CheckoutContainer>

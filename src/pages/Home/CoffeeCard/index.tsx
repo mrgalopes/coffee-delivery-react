@@ -10,7 +10,7 @@ import {
 } from "./styles";
 
 import CoffeeImg from "../../../assets/Type=Café Gelado.png";
-import { CoffeeAmountSelector } from "../CoffeeAmountSelector";
+import { CoffeeAmountSelector } from "../../../components/CoffeeAmountSelector";
 
 export function CoffeeCard() {
   return (
