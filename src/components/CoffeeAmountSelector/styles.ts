@@ -26,5 +26,4 @@ export const Symbol = styled.button`
 export const CoffeeAmount = styled.span`
   font-size: 1rem;
   line-height: 1.3;
-  font-weight: bold;
 `
