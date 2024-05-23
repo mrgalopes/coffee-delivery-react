@@ -10,8 +10,16 @@ export const CheckoutContainer = styled.div`
   }
 `
 
+export const Heading = styled.h2`
+  margin-bottom: 1rem;
+
+  font-family: "Baloo 2", sans-serif;
+  font-size: 1.125rem;
+  font-weight: bold;
+  line-height: 1.3;
+`
+
 export const Cards = styled.div`
-  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -148,7 +156,6 @@ export const PaymentSelectionButton = styled.button`
 export const SelectedCoffeeCard = styled(Card)`
   border-top-right-radius: 44px;
   border-bottom-left-radius: 44px;
-  margin-top: 1rem;
 `
 
 export const Item = styled.div`

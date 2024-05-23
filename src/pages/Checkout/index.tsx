@@ -13,6 +13,7 @@ import {
   CheckoutContainer,
   ComplementInput,
   ConfirmOrderButton,
+  Heading,
   Input,
   Inputs,
   Item,
@@ -33,13 +34,13 @@ export function Checkout() {
     <CheckoutContainer>
       <form>
         <section>
-          <h2>Complete o seu pedido</h2>
+          <Heading>Complete o seu pedido</Heading>
           <Cards>
             <Card>
               <CardHeader $iconColor="yellow-dark">
                 <MapPinLine size={22} />
                 <div>
-                  <h3>Endereço de entrega</h3>
+                  <h3>Endereço de Entrega</h3>
                   <p>Informe o endereço onde deseja receber o pedido</p>
                 </div>
               </CardHeader>
@@ -86,7 +87,7 @@ export function Checkout() {
         </section>
 
         <section>
-          <h2>Cafés selecionados</h2>
+          <Heading>Cafés selecionados</Heading>
           <SelectedCoffeeCard>
             <Item>
               <div>
