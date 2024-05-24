@@ -2,13 +2,13 @@ import {
   HeroSection,
   HeroText,
   HomeContainer,
-  Icon,
   OurCoffeesSection,
   ProductDescription,
 } from "./styles";
 import HeroImg from "../../assets/Hero.png";
 import { Coffee, Package, ShoppingCart, Timer } from "@phosphor-icons/react";
 import { CoffeeCard } from "./CoffeeCard";
+import { Icon } from "../../components/Icon";
 
 export function Home() {
   return (

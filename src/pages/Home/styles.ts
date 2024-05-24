@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { defaultTheme } from "../../styles/themes/defaultTheme";
 
 export const HomeContainer = styled.main`
   padding: 6rem 10rem;
@@ -41,22 +40,6 @@ export const ProductDescription = styled.div`
     align-items: center;
     gap: 0.75rem;
   }
-`
-
-interface IconProps {
-  $variant: keyof typeof defaultTheme; 
-}
-
-export const Icon = styled.span<IconProps>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  height: 2rem;
-  width: 2rem;
-
-  background-color: ${props => props.theme[props.$variant]};
-  color: white;
 `
 
 export const OurCoffeesSection = styled.section`
