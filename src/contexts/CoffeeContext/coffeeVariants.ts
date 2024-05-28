@@ -1,12 +1,6 @@
-interface CoffeeVariant {
-  name: string;
-  filename: string;
-  tags: string[];
-  description: string;
-  priceInCents: number;
-}
+import { CoffeeVariant } from ".";
 
-export const CoffeeVariants: CoffeeVariant[] = [
+export const coffeeVariants: CoffeeVariant[] = [
   {
     name: "Expresso Tradicional",
     filename: "Type=Expresso.png",

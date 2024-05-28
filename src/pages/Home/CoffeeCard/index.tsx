@@ -9,24 +9,45 @@ import {
   PriceRow,
 } from "./styles";
 
-import CoffeeImg from "../../../assets/Type=Café Gelado.png";
 import { CoffeeAmountSelector } from "../../../components/CoffeeAmountSelector";
 
-export function CoffeeCard() {
+interface CoffeeCardProps {
+  title: string;
+  imgPath: string;
+  tags: string[];
+  description: string;
+  priceInCents: number;
+}
+
+export function CoffeeCard({
+  title,
+  imgPath,
+  tags,
+  description,
+  priceInCents,
+}: CoffeeCardProps) {
+  const fullImgPath = `./src/assets/${imgPath}`;
+
+  const formatter = Intl.NumberFormat("pt-BR", {
+    style: "decimal",
+    minimumFractionDigits: 2,
+  });
+  const priceInReals = formatter.format(priceInCents / 100);
   return (
     <CoffeeCardContainer>
-      <img src={CoffeeImg} alt="foto do café gelado" />
+      <img src={fullImgPath} alt="foto do café gelado" />
       <CoffeeTags>
-        <CoffeeTag>Tradicional</CoffeeTag>
-        <CoffeeTag>Gelado</CoffeeTag>
+        {tags.map((tag) => (
+          <CoffeeTag key={tag}>{tag}</CoffeeTag>
+        ))}
       </CoffeeTags>
-      <h3>Espresso Gelado</h3>
-      <p>Bebida preparada com café expresso e cubos de gelo</p>
+      <h3>{title}</h3>
+      <p>{description}</p>
 
       <PriceRow>
         <PriceInfo>
           R$&nbsp;
-          <span>9,90</span>
+          <span>{priceInReals}</span>
         </PriceInfo>
         <ItemSelectionInfo>
           <CoffeeAmountSelector />

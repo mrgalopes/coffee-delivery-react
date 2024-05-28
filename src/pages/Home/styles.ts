@@ -51,5 +51,11 @@ export const OurCoffeesSection = styled.section`
     font-weight: 800;
     margin-bottom: 3.375rem;
   }
+
+  & > div {
+    display: grid;
+    gap: 2.5rem 2rem;
+    grid-template-columns: repeat(4, 1fr);
+  }
 `
 

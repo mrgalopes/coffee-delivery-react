@@ -9,8 +9,12 @@ import HeroImg from "../../assets/Hero.png";
 import { Coffee, Package, ShoppingCart, Timer } from "@phosphor-icons/react";
 import { CoffeeCard } from "./CoffeeCard";
 import { Icon } from "../../components/Icon";
+import { useContext } from "react";
+import { CoffeeContext } from "../../contexts/CoffeeContext";
 
 export function Home() {
+  const { coffeeVariants } = useContext(CoffeeContext);
+
   return (
     <HomeContainer>
       <HeroSection>
@@ -55,7 +59,18 @@ export function Home() {
 
       <OurCoffeesSection>
         <h2>Nossos cafés</h2>
-        <CoffeeCard />
+        <div>
+          {coffeeVariants.map((coffee) => (
+            <CoffeeCard
+              key={coffee.name}
+              title={coffee.name}
+              tags={coffee.tags}
+              description={coffee.description}
+              imgPath={coffee.filename}
+              priceInCents={coffee.priceInCents}
+            />
+          ))}
+        </div>
       </OurCoffeesSection>
     </HomeContainer>
   );
