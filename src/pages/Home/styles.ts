@@ -1,7 +1,12 @@
 import styled from "styled-components";
+import Background from "../../assets/HomeBackground.svg"
 
 export const HomeContainer = styled.main`
   padding: 6rem 10rem;
+
+  background-image: url(${Background});
+  background-repeat: no-repeat;
+  background-size: contain;
 `
 
 export const HeroSection = styled.section`
