@@ -10,6 +10,9 @@ import {
 } from "./styles";
 
 import { CoffeeAmountSelector } from "../../../components/CoffeeAmountSelector";
+import { useContext } from "react";
+import { CartContext } from "../../../contexts/CartContext";
+import { CoffeeVariant } from "../../../contexts/CoffeeContext";
 
 interface CoffeeCardProps {
   title: string;
@@ -26,6 +29,8 @@ export function CoffeeCard({
   description,
   priceInCents,
 }: CoffeeCardProps) {
+  const { addToCart } = useContext(CartContext);
+
   const fullImgPath = `./src/assets/${imgPath}`;
 
   const formatter = Intl.NumberFormat("pt-BR", {
@@ -33,6 +38,19 @@ export function CoffeeCard({
     minimumFractionDigits: 2,
   });
   const priceInReals = formatter.format(priceInCents / 100);
+
+  function handleAddToCart() {
+    const item: CoffeeVariant = {
+      name: title,
+      description,
+      filename: imgPath,
+      priceInCents,
+      tags,
+    };
+
+    addToCart(item, 1);
+  }
+
   return (
     <CoffeeCardContainer>
       <img src={fullImgPath} alt="foto do café gelado" />
@@ -51,7 +69,7 @@ export function CoffeeCard({
         </PriceInfo>
         <ItemSelectionInfo>
           <CoffeeAmountSelector />
-          <AddToCardButton>
+          <AddToCardButton onClick={handleAddToCart}>
             <ShoppingCartSimple size={22} weight="fill" />
           </AddToCardButton>
         </ItemSelectionInfo>

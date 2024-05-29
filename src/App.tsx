@@ -3,12 +3,15 @@ import { defaultTheme } from "./styles/themes/defaultTheme";
 import { GlobalStyle } from "./styles/global";
 import { Router } from "./Router";
 import { CoffeeProvider } from "./contexts/CoffeeContext";
+import { CartProvider } from "./contexts/CartContext";
 
 function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <CoffeeProvider>
-        <Router />
+        <CartProvider>
+          <Router />
+        </CartProvider>
       </CoffeeProvider>
 
       <GlobalStyle />
