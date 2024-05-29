@@ -56,7 +56,7 @@ export function CoffeeCard({
       tags,
     };
 
-    addToCart(item, 1);
+    addToCart(item, quantity);
     setQuantity(1);
   }
 
