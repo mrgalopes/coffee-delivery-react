@@ -10,7 +10,7 @@ import {
 } from "./styles";
 
 import { CoffeeAmountSelector } from "../../../components/CoffeeAmountSelector";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../../../contexts/CartContext";
 import { CoffeeVariant } from "../../../contexts/CoffeeContext";
 
@@ -29,6 +29,7 @@ export function CoffeeCard({
   description,
   priceInCents,
 }: CoffeeCardProps) {
+  const [quantity, setQuantity] = useState(1);
   const { addToCart } = useContext(CartContext);
 
   const fullImgPath = `./src/assets/${imgPath}`;
@@ -38,6 +39,13 @@ export function CoffeeCard({
     minimumFractionDigits: 2,
   });
   const priceInReals = formatter.format(priceInCents / 100);
+
+  function handleUpdateQuantity(amount: number) {
+    if (quantity + amount < 1) {
+      return;
+    }
+    setQuantity((q) => q + amount);
+  }
 
   function handleAddToCart() {
     const item: CoffeeVariant = {
@@ -49,6 +57,7 @@ export function CoffeeCard({
     };
 
     addToCart(item, 1);
+    setQuantity(1);
   }
 
   return (
@@ -68,7 +77,10 @@ export function CoffeeCard({
           <span>{priceInReals}</span>
         </PriceInfo>
         <ItemSelectionInfo>
-          <CoffeeAmountSelector />
+          <CoffeeAmountSelector
+            value={quantity}
+            updater={handleUpdateQuantity}
+          />
           <AddToCardButton onClick={handleAddToCart}>
             <ShoppingCartSimple size={22} weight="fill" />
           </AddToCardButton>

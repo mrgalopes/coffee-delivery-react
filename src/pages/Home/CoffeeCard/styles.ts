@@ -90,4 +90,6 @@ export const AddToCardButton = styled.button`
 
   border: none;
   border-radius: 6px;
+
+  cursor: pointer;
 `
