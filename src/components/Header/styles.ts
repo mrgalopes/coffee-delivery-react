@@ -38,4 +38,26 @@ export const LocationButton = styled(BaseButton)`
 export const CartButton = styled(BaseButton)`
   background-color: ${props => props.theme["yellow-light"]};
   color: ${props => props.theme["yellow-dark"]};
+  position: relative;
+`
+
+export const CartCounter = styled.span`
+  background-color: ${props => props.theme["yellow-dark"]};
+  color: ${props => props.theme.white};
+
+  height: 1.25rem;
+  width: 1.25rem;
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  top: -0.5rem;
+  left: 1.646875rem;
+
+  font-size: 0.75rem;
+  font-weight: bold;
+  line-height: 1.3;
 `

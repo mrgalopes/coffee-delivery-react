@@ -8,6 +8,7 @@ interface CartItem {
 
 interface CartContextState {
   cart: CartItem[];
+  numberOfItemsInCart: number;
   addToCart: (item: CoffeeVariant, quantity: number) => void;
 }
 
@@ -20,6 +21,11 @@ interface CartProviderProps {
 export function CartProvider({ children }: CartProviderProps) {
   const [cart, setCart] = useState<CartItem[]>([]);
 
+  const numberOfItemsInCart = cart.reduce(
+    (prev, item) => prev + item.quantity,
+    0
+  );
+
   function addToCart(item: CoffeeVariant, quantity: number) {
     const newItem: CartItem = {
       item,
@@ -30,6 +36,7 @@ export function CartProvider({ children }: CartProviderProps) {
 
   const value = {
     cart,
+    numberOfItemsInCart,
     addToCart,
   };
 
