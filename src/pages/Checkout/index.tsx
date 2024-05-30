@@ -11,41 +11,17 @@ import {
   Cards,
   CheckoutContainer,
   ComplementInput,
-  ConfirmOrderButton,
   Heading,
   Input,
   Inputs,
-  OrderSummary,
   PaymentSelectionButton,
   PaymentSelectionSection,
-  SelectedCoffeeCard,
 } from "./styles";
 
-import { FormEvent, useContext } from "react";
-import { CartContext } from "../../contexts/CartContext";
-import { ItemInCart } from "./ItemInCart";
+import { FormEvent } from "react";
+import { SelectedCoffeesSection } from "./SelectedCoffeesSection";
 
 export function Checkout() {
-  const { cart, totalPriceInCents } = useContext(CartContext);
-
-  const formatter = Intl.NumberFormat("pt-BR", {
-    style: "decimal",
-    minimumFractionDigits: 2,
-  });
-
-  const formattedTotalItemsPriceInReals = formatter.format(
-    totalPriceInCents / 100
-  );
-
-  const deliveryPriceInCents = 350;
-  const formattedDeliveryPriceInReals = formatter.format(
-    deliveryPriceInCents / 100
-  );
-
-  const formattedFinalPriceInReals = formatter.format(
-    (totalPriceInCents + deliveryPriceInCents) / 100
-  );
-
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
   }
@@ -106,31 +82,7 @@ export function Checkout() {
           </Cards>
         </section>
 
-        <section>
-          <Heading>Cafés selecionados</Heading>
-          <SelectedCoffeeCard>
-            {cart.map((cartItem) => (
-              <ItemInCart key={cartItem.item.name} cartItem={cartItem} />
-            ))}
-            <OrderSummary>
-              <div>
-                <span>Total de itens</span>
-                <span>R$ {formattedTotalItemsPriceInReals}</span>
-              </div>
-              <div>
-                <span>Entrega</span>
-                <span>R$ {formattedDeliveryPriceInReals}</span>
-              </div>
-              <div>
-                <span>Total</span>
-                <span>R$ {formattedFinalPriceInReals}</span>
-              </div>
-            </OrderSummary>
-            <ConfirmOrderButton type="submit">
-              Confirmar Pedido
-            </ConfirmOrderButton>
-          </SelectedCoffeeCard>
-        </section>
+        <SelectedCoffeesSection />
       </form>
     </CheckoutContainer>
   );
