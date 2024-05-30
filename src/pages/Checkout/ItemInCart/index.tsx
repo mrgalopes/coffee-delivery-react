@@ -1,13 +1,16 @@
 import { Trash } from "@phosphor-icons/react";
 import { CoffeeAmountSelector } from "../../../components/CoffeeAmountSelector";
-import { CartItem } from "../../../contexts/CartContext";
+import { CartContext, CartItem } from "../../../contexts/CartContext";
 import { Item, ItemActions, RemoveButton } from "./styles";
+import { useContext } from "react";
 
 interface CartItemProps {
   cartItem: CartItem;
 }
 
 export function ItemInCart({ cartItem }: CartItemProps) {
+  const { increaseQuantityBy } = useContext(CartContext);
+
   const fullImgPath = `./src/assets/${cartItem.item.filename}`;
 
   const formatter = Intl.NumberFormat("pt-BR", {
@@ -18,6 +21,10 @@ export function ItemInCart({ cartItem }: CartItemProps) {
   const totalPriceInReals =
     (cartItem.item.priceInCents * cartItem.quantity) / 100;
 
+  function increaseThisItemQuantityBy(amount: number) {
+    increaseQuantityBy(cartItem.item.name, amount);
+  }
+
   return (
     <Item>
       <div>
@@ -27,7 +34,7 @@ export function ItemInCart({ cartItem }: CartItemProps) {
           <div>
             <CoffeeAmountSelector
               value={cartItem.quantity}
-              updater={() => {}}
+              updater={increaseThisItemQuantityBy}
             />
             <RemoveButton>
               <Trash />

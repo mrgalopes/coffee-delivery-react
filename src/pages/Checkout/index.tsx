@@ -21,7 +21,7 @@ import {
   SelectedCoffeeCard,
 } from "./styles";
 
-import { useContext } from "react";
+import { FormEvent, useContext } from "react";
 import { CartContext } from "../../contexts/CartContext";
 import { ItemInCart } from "./ItemInCart";
 
@@ -46,9 +46,13 @@ export function Checkout() {
     (totalPriceInCents + deliveryPriceInCents) / 100
   );
 
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+  }
+
   return (
     <CheckoutContainer>
-      <form>
+      <form onSubmit={handleSubmit}>
         <section>
           <Heading>Complete o seu pedido</Heading>
           <Cards>
@@ -122,7 +126,9 @@ export function Checkout() {
                 <span>R$ {formattedFinalPriceInReals}</span>
               </div>
             </OrderSummary>
-            <ConfirmOrderButton>Confirmar Pedido</ConfirmOrderButton>
+            <ConfirmOrderButton type="submit">
+              Confirmar Pedido
+            </ConfirmOrderButton>
           </SelectedCoffeeCard>
         </section>
       </form>
