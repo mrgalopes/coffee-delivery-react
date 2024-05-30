@@ -1,7 +1,7 @@
 import { ReactNode, createContext, useState } from "react";
 import { CoffeeVariant } from "../CoffeeContext";
 
-interface CartItem {
+export interface CartItem {
   item: CoffeeVariant;
   quantity: number;
 }

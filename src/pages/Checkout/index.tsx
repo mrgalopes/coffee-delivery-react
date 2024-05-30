@@ -4,7 +4,6 @@ import {
   CurrencyDollar,
   MapPinLine,
   Money,
-  Trash,
 } from "@phosphor-icons/react";
 import {
   Card,
@@ -16,20 +15,19 @@ import {
   Heading,
   Input,
   Inputs,
-  Item,
-  ItemActions,
   OrderSummary,
   PaymentSelectionButton,
   PaymentSelectionSection,
-  RemoveButton,
   SelectedCoffeeCard,
 } from "./styles";
 
-import Expresso from "../../assets/Type=Expresso.png";
-import Latte from "../../assets/Type=Latte.png";
-import { CoffeeAmountSelector } from "../../components/CoffeeAmountSelector";
+import { useContext } from "react";
+import { CartContext } from "../../contexts/CartContext";
+import { ItemInCart } from "./ItemInCart";
 
 export function Checkout() {
+  const { cart } = useContext(CartContext);
+
   return (
     <CheckoutContainer>
       <form>
@@ -89,38 +87,9 @@ export function Checkout() {
         <section>
           <Heading>Cafés selecionados</Heading>
           <SelectedCoffeeCard>
-            <Item>
-              <div>
-                <img src={Expresso} alt="Expresso" />
-                <ItemActions>
-                  <p>Expresso Tradicional</p>
-                  <div>
-                    <CoffeeAmountSelector />
-                    <RemoveButton>
-                      <Trash />
-                      <span>Remover</span>
-                    </RemoveButton>
-                  </div>
-                </ItemActions>
-              </div>
-              <span>R$ 9,90</span>
-            </Item>
-            <Item>
-              <div>
-                <img src={Latte} alt="Latte" />
-                <ItemActions>
-                  <p>Latte</p>
-                  <div>
-                    <CoffeeAmountSelector />
-                    <RemoveButton>
-                      <Trash />
-                      <span>Remover</span>
-                    </RemoveButton>
-                  </div>
-                </ItemActions>
-              </div>
-              <span>R$ 9,90</span>
-            </Item>
+            {cart.map((cartItem) => (
+              <ItemInCart key={cartItem.item.name} cartItem={cartItem} />
+            ))}
             <OrderSummary>
               <div>
                 <span>Total de itens</span>
