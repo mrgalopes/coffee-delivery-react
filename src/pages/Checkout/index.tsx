@@ -26,7 +26,25 @@ import { CartContext } from "../../contexts/CartContext";
 import { ItemInCart } from "./ItemInCart";
 
 export function Checkout() {
-  const { cart } = useContext(CartContext);
+  const { cart, totalPriceInCents } = useContext(CartContext);
+
+  const formatter = Intl.NumberFormat("pt-BR", {
+    style: "decimal",
+    minimumFractionDigits: 2,
+  });
+
+  const formattedTotalItemsPriceInReals = formatter.format(
+    totalPriceInCents / 100
+  );
+
+  const deliveryPriceInCents = 350;
+  const formattedDeliveryPriceInReals = formatter.format(
+    deliveryPriceInCents / 100
+  );
+
+  const formattedFinalPriceInReals = formatter.format(
+    (totalPriceInCents + deliveryPriceInCents) / 100
+  );
 
   return (
     <CheckoutContainer>
@@ -93,15 +111,15 @@ export function Checkout() {
             <OrderSummary>
               <div>
                 <span>Total de itens</span>
-                <span>R$ 29,70</span>
+                <span>R$ {formattedTotalItemsPriceInReals}</span>
               </div>
               <div>
                 <span>Entrega</span>
-                <span>R$ 3,50</span>
+                <span>R$ {formattedDeliveryPriceInReals}</span>
               </div>
               <div>
                 <span>Total</span>
-                <span>R$ 33,20</span>
+                <span>R$ {formattedFinalPriceInReals}</span>
               </div>
             </OrderSummary>
             <ConfirmOrderButton>Confirmar Pedido</ConfirmOrderButton>

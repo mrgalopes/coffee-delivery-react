@@ -9,6 +9,7 @@ export interface CartItem {
 interface CartContextState {
   cart: CartItem[];
   numberOfItemsInCart: number;
+  totalPriceInCents: number;
   addToCart: (item: CoffeeVariant, quantity: number) => void;
 }
 
@@ -22,7 +23,12 @@ export function CartProvider({ children }: CartProviderProps) {
   const [cart, setCart] = useState<CartItem[]>([]);
 
   const numberOfItemsInCart = cart.reduce(
-    (prev, item) => prev + item.quantity,
+    (prev, cartItem) => prev + cartItem.quantity,
+    0
+  );
+
+  const totalPriceInCents = cart.reduce(
+    (prev, cartItem) => prev + cartItem.item.priceInCents * cartItem.quantity,
     0
   );
 
@@ -37,6 +43,7 @@ export function CartProvider({ children }: CartProviderProps) {
   const value = {
     cart,
     numberOfItemsInCart,
+    totalPriceInCents,
     addToCart,
   };
 
