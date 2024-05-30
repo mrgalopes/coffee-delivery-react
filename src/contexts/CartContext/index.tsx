@@ -35,11 +35,25 @@ export function CartProvider({ children }: CartProviderProps) {
   );
 
   function addToCart(item: CoffeeVariant, quantity: number) {
-    const newItem: CartItem = {
-      item,
-      quantity,
-    };
-    setCart((state) => [...state, newItem]);
+    if (cart.findIndex((cartItem) => cartItem.item.name === item.name) !== -1) {
+      setCart((state) =>
+        state.map((cartItem) => {
+          if (cartItem.item.name !== item.name) {
+            return cartItem;
+          }
+          return {
+            ...cartItem,
+            quantity: cartItem.quantity + quantity,
+          };
+        })
+      );
+    } else {
+      const newItem: CartItem = {
+        item,
+        quantity,
+      };
+      setCart((state) => [...state, newItem]);
+    }
   }
 
   function increaseQuantityBy(itemName: string, amount: number) {
