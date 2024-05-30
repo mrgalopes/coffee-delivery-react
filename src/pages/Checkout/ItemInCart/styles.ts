@@ -48,6 +48,8 @@ export const RemoveButton = styled.button`
   border: none;
   border-radius: 6px;
 
+  cursor: pointer;
+
   svg {
     color: ${props => props.theme.purple};
   }

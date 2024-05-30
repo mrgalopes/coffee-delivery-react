@@ -12,6 +12,7 @@ interface CartContextState {
   totalPriceInCents: number;
   addToCart: (item: CoffeeVariant, quantity: number) => void;
   increaseQuantityBy: (itemName: string, amount: number) => void;
+  removeItemFromCart: (itemName: string) => void;
 }
 
 export const CartContext = createContext({} as CartContextState);
@@ -55,12 +56,19 @@ export function CartProvider({ children }: CartProviderProps) {
     );
   }
 
+  function removeItemFromCart(itemName: string) {
+    setCart((oldCart) =>
+      oldCart.filter((cartItem) => cartItem.item.name !== itemName)
+    );
+  }
+
   const value = {
     cart,
     numberOfItemsInCart,
     totalPriceInCents,
     addToCart,
     increaseQuantityBy,
+    removeItemFromCart,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

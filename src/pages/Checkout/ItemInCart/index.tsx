@@ -9,7 +9,7 @@ interface CartItemProps {
 }
 
 export function ItemInCart({ cartItem }: CartItemProps) {
-  const { increaseQuantityBy } = useContext(CartContext);
+  const { increaseQuantityBy, removeItemFromCart } = useContext(CartContext);
 
   const fullImgPath = `./src/assets/${cartItem.item.filename}`;
 
@@ -25,6 +25,10 @@ export function ItemInCart({ cartItem }: CartItemProps) {
     increaseQuantityBy(cartItem.item.name, amount);
   }
 
+  function handleRemoveItemFromCart() {
+    removeItemFromCart(cartItem.item.name);
+  }
+
   return (
     <Item>
       <div>
@@ -36,7 +40,7 @@ export function ItemInCart({ cartItem }: CartItemProps) {
               value={cartItem.quantity}
               updater={increaseThisItemQuantityBy}
             />
-            <RemoveButton>
+            <RemoveButton onClick={handleRemoveItemFromCart}>
               <Trash />
               <span>Remover</span>
             </RemoveButton>
