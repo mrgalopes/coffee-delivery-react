@@ -22,6 +22,7 @@ import { SelectedCoffeesSection } from "./SelectedCoffeesSection";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from "react-router-dom";
 
 const checkoutFormValidationSchema = z.object({
   address: z.object({
@@ -41,6 +42,8 @@ const checkoutFormValidationSchema = z.object({
 type CheckoutInfo = z.infer<typeof checkoutFormValidationSchema>;
 
 export function Checkout() {
+  const navigate = useNavigate();
+
   const {
     register,
     formState: { errors },
@@ -51,6 +54,7 @@ export function Checkout() {
 
   function handleSubmitCheckout(data: CheckoutInfo) {
     console.log(data);
+    navigate("/success");
   }
 
   return (
@@ -186,7 +190,6 @@ export function Checkout() {
               </PaymentSelectionSection>
               {errors.paymentMethod && <p>{errors.paymentMethod.message}</p>}
             </Card>
-            <button type="submit">submit</button>
           </Cards>
         </section>
 
