@@ -121,9 +121,17 @@ export const ComplementInput = styled(Input)`
 export const PaymentSelectionSection = styled.div`
   display: flex;
   gap: 0.75rem;
+
+  input {
+    display: none;
+  }
+
+  input:checked + label {
+    background-color: ${props => props.theme["purple-light"]};
+  }
 `
 
-export const PaymentSelectionButton = styled.button`
+export const PaymentSelectionButton = styled.label`
   padding: 1rem;
   width: 100%;
 
@@ -149,6 +157,4 @@ export const PaymentSelectionButton = styled.button`
   &:hover {
     background-color: ${props => props.theme["base-hover"]};
   }
-
-  // TODO colocar estado selecionado
 `
