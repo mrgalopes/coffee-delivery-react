@@ -19,6 +19,10 @@ export const Symbol = styled.button`
   cursor: pointer;
 
   svg {
+    color: ${props => props.theme["purple"]};
+  }
+
+  svg:hover {
     color: ${props => props.theme["purple-dark"]};
   }
 `

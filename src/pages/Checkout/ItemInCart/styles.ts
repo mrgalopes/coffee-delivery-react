@@ -60,4 +60,16 @@ export const RemoveButton = styled.button`
     line-height: 1.6;
     font-size: 0.75rem;
   }
+
+  &:hover {
+    background-color: ${props => props.theme["base-hover"]};
+
+    svg {
+      color: ${props => props.theme["purple-dark"]};
+    }
+
+    span {
+      color: ${props => props.theme["base-subtitle"]}
+    }
+  }
 `

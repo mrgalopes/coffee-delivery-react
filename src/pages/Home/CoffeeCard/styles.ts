@@ -92,4 +92,8 @@ export const AddToCardButton = styled.button`
   border-radius: 6px;
 
   cursor: pointer;
+
+  &:hover {
+    background-color: ${props => props.theme["purple"]};
+  }
 `
