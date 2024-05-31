@@ -8,8 +8,31 @@ import {
 import SuccessImg from "../../assets/Illustration.svg";
 import { CurrencyDollar, MapPin, Timer } from "@phosphor-icons/react";
 import { Icon } from "../../components/Icon";
+import { useLocation } from "react-router-dom";
+import { CheckoutInfo } from "../Checkout";
+
+type PaymentMethod = "credit" | "debit" | "cash";
+
+function paymentMethodToString(paymentMethod: PaymentMethod): string {
+  switch (paymentMethod) {
+    case "credit":
+      return "Cartão de Crédito";
+
+    case "debit":
+      return "Cartão de Débito";
+
+    case "cash":
+      return "Dinheiro";
+  }
+}
 
 export function Success() {
+  const location = useLocation();
+
+  const { address, paymentMethod } = location.state as CheckoutInfo;
+
+  const paymentMethodString = paymentMethodToString(paymentMethod);
+
   return (
     <SuccessContainer>
       <div>
@@ -24,9 +47,15 @@ export function Success() {
             </Icon>
             <div>
               <p>
-                Entrega em <span>Rua João Daniel Martinelli, 102</span>
+                Entrega em{" "}
+                <span>
+                  {address.streetName}, {address.streetNumber}{" "}
+                  {address.complement ?? ""}
+                </span>
               </p>
-              <p>Farrapos - Porto Alegre, RS</p>
+              <p>
+                {address.neighborhood} - {address.city}, {address.state}
+              </p>
             </div>
           </DescriptionLine>
           <DescriptionLine>
@@ -47,7 +76,7 @@ export function Success() {
             <div>
               <p>Pagamento na entrega</p>
               <p>
-                <span>Cartão de Crédito</span>
+                <span>{paymentMethodString}</span>
               </p>
             </div>
           </DescriptionLine>

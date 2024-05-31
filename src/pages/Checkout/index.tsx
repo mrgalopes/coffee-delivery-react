@@ -41,10 +41,10 @@ const checkoutFormValidationSchema = z.object({
   }),
 });
 
-type CheckoutInfo = z.infer<typeof checkoutFormValidationSchema>;
+export type CheckoutInfo = z.infer<typeof checkoutFormValidationSchema>;
 
 export function Checkout() {
-  const { numberOfItemsInCart } = useContext(CartContext);
+  const { numberOfItemsInCart, clearCart } = useContext(CartContext);
 
   const navigate = useNavigate();
 
@@ -65,8 +65,8 @@ export function Checkout() {
   });
 
   function handleSubmitCheckout(data: CheckoutInfo) {
-    console.log(data);
-    navigate("/success");
+    clearCart();
+    navigate("/success", { state: data });
   }
 
   return (

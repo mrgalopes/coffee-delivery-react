@@ -13,6 +13,7 @@ interface CartContextState {
   addToCart: (item: CoffeeVariant, quantity: number) => void;
   increaseQuantityBy: (itemName: string, amount: number) => void;
   removeItemFromCart: (itemName: string) => void;
+  clearCart: () => void;
 }
 
 export const CartContext = createContext({} as CartContextState);
@@ -76,6 +77,10 @@ export function CartProvider({ children }: CartProviderProps) {
     );
   }
 
+  function clearCart() {
+    setCart([]);
+  }
+
   const value = {
     cart,
     numberOfItemsInCart,
@@ -83,6 +88,7 @@ export function CartProvider({ children }: CartProviderProps) {
     addToCart,
     increaseQuantityBy,
     removeItemFromCart,
+    clearCart,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
