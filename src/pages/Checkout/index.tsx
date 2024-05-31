@@ -20,24 +20,34 @@ import {
 
 import { SelectedCoffeesSection } from "./SelectedCoffeesSection";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-interface Address {
-  zipNumber: string;
-  streetName: string;
-  streetNumber: string;
-  complement?: string;
-  neighborhood: string;
-  city: string;
-  state: string;
-}
+const checkoutFormValidationSchema = z.object({
+  address: z.object({
+    zipNumber: z.string().min(1, "Campo CEP é obrigatório!"),
+    streetName: z.string().min(1, "Campo Rua é obrigatório!"),
+    streetNumber: z.string().min(1, "Campo Número é obrigatório!"),
+    complement: z.string().optional(),
+    neighborhood: z.string().min(1, "Campo Bairro é obrigatório!"),
+    city: z.string().min(1, "Campo Cidade é obrigatório!"),
+    state: z.string().min(1, "Campo UF é obrigatório!"),
+  }),
+  paymentMethod: z.enum(["credit", "debit", "cash"], {
+    message: "Escolha uma forma de pagamento",
+  }),
+});
 
-interface CheckoutInfo {
-  address: Address;
-  paymentMethod: "credit" | "debit" | "cash";
-}
+type CheckoutInfo = z.infer<typeof checkoutFormValidationSchema>;
 
 export function Checkout() {
-  const { register, handleSubmit } = useForm<CheckoutInfo>();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<CheckoutInfo>({
+    resolver: zodResolver(checkoutFormValidationSchema),
+  });
 
   function handleSubmitCheckout(data: CheckoutInfo) {
     console.log(data);
@@ -58,41 +68,75 @@ export function Checkout() {
                 </div>
               </CardHeader>
               <Inputs>
-                <Input
-                  type="text"
-                  placeholder="CEP"
-                  {...register("address.zipNumber")}
-                />
-                <Input
-                  type="text"
-                  placeholder="Rua"
-                  {...register("address.streetName")}
-                />
-                <Input
-                  type="text"
-                  placeholder="Número"
-                  {...register("address.streetNumber")}
-                />
-                <ComplementInput
-                  type="text"
-                  placeholder="Complemento (Opcional)"
-                  {...register("address.complement")}
-                />
-                <Input
-                  type="text"
-                  placeholder="Bairro"
-                  {...register("address.neighborhood")}
-                />
-                <Input
-                  type="text"
-                  placeholder="Cidade"
-                  {...register("address.city")}
-                />
-                <Input
-                  type="text"
-                  placeholder="UF"
-                  {...register("address.state")}
-                />
+                <div>
+                  <Input
+                    type="text"
+                    placeholder="CEP"
+                    {...register("address.zipNumber")}
+                    aria-invalid={errors.address?.zipNumber ? "true" : "false"}
+                  />
+                  {errors.address?.zipNumber && (
+                    <p>{errors.address.zipNumber.message}</p>
+                  )}
+                </div>
+                <div>
+                  <Input
+                    type="text"
+                    placeholder="Rua"
+                    {...register("address.streetName")}
+                  />
+                  {errors.address?.streetName && (
+                    <p>{errors.address.streetName.message}</p>
+                  )}
+                </div>
+                <div>
+                  <Input
+                    type="text"
+                    placeholder="Número"
+                    {...register("address.streetNumber")}
+                  />
+                  {errors.address?.streetNumber && (
+                    <p>{errors.address.streetNumber.message}</p>
+                  )}
+                </div>
+                <div>
+                  <ComplementInput
+                    type="text"
+                    placeholder="Complemento (Opcional)"
+                    {...register("address.complement")}
+                  />
+                  {errors.address?.complement && (
+                    <p>{errors.address.complement.message}</p>
+                  )}
+                </div>
+                <div>
+                  <Input
+                    type="text"
+                    placeholder="Bairro"
+                    {...register("address.neighborhood")}
+                  />
+                  {errors.address?.neighborhood && (
+                    <p>{errors.address.neighborhood.message}</p>
+                  )}
+                </div>
+                <div>
+                  <Input
+                    type="text"
+                    placeholder="Cidade"
+                    {...register("address.city")}
+                  />
+                  {errors.address?.city && <p>{errors.address.city.message}</p>}
+                </div>
+                <div>
+                  <Input
+                    type="text"
+                    placeholder="UF"
+                    {...register("address.state")}
+                  />
+                  {errors.address?.state && (
+                    <p>{errors.address.state.message}</p>
+                  )}
+                </div>
               </Inputs>
             </Card>
             <Card>
@@ -140,7 +184,9 @@ export function Checkout() {
                   Dinheiro
                 </PaymentSelectionButton>
               </PaymentSelectionSection>
+              {errors.paymentMethod && <p>{errors.paymentMethod.message}</p>}
             </Card>
+            <button type="submit">submit</button>
           </Cards>
         </section>
 

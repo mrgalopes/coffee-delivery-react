@@ -63,6 +63,10 @@ export const Inputs = styled.div`
   grid-template-columns: 200px 1fr 60px;
   gap: 1rem 0.75rem;
 
+  & > div > input {
+    width: 100%;
+  }
+
   & > :nth-child(1) { // CEP
     grid-column: 1 / 2;
     grid-row: 1 / 2;
