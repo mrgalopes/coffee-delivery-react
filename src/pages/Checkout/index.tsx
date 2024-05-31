@@ -23,6 +23,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { CartContext } from "../../contexts/CartContext";
 
 const checkoutFormValidationSchema = z.object({
   address: z.object({
@@ -42,7 +44,17 @@ const checkoutFormValidationSchema = z.object({
 type CheckoutInfo = z.infer<typeof checkoutFormValidationSchema>;
 
 export function Checkout() {
+  const { numberOfItemsInCart } = useContext(CartContext);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (numberOfItemsInCart === 0) {
+      console.log("redirecting to home...");
+
+      navigate("/");
+    }
+  }, [numberOfItemsInCart, navigate]);
 
   const {
     register,
